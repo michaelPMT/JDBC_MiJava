@@ -4,3 +4,7 @@ git clone ________________________
 git add .
 git commit -m "--"
 git push origin master
+
+----------------------------
+sqlplus /nolog para ver si hay conexion
+\\172.17.156
