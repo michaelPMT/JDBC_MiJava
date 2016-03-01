@@ -8,3 +8,7 @@ git push origin master
 ----------------------------
 sqlplus /nolog para ver si hay conexion
 \\172.17.156
+
+connect willyan/atletico as sysdba
+conn system/oracle
+show user
