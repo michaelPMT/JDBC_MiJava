@@ -12,3 +12,4 @@ sqlplus /nolog para ver si hay conexion
 connect willyan/atletico as sysdba
 conn system/oracle
 show user
+dabases
