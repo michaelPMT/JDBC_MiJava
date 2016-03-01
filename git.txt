@@ -1,5 +1,6 @@
 git log -4
 git pull origin master
-git push origin master
 git clone ________________________
 git add .
+git commit -m "--"
+git push origin master
