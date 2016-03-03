@@ -1,7 +1,14 @@
 package pe.egcc.prueba;
+
 import java.sql.Connection;
 import java.sql.Statement;
-public class prueba02 {
+import pe.egcc.db.AccesoDB;
+
+/**
+ *
+ * @author Gustavo Coronel
+ */
+public class Prueba02 {
 
   public static void main(String[] args) {
     Connection cn = null;
@@ -13,6 +20,7 @@ public class prueba02 {
               + "VCH_PARADESCRIPCION,VCH_PARAVALOR,"
               + "VCH_PARAESTADO) values('776','PROFESOR',"
               + "'GUSTAVO CORONEL','ACTIVO')";
+
       Statement stm = cn.createStatement();
       stm.executeUpdate(sql);
       System.out.println("Parámetro registrado.");
@@ -29,4 +37,5 @@ public class prueba02 {
       }
     }
   }
+
 }

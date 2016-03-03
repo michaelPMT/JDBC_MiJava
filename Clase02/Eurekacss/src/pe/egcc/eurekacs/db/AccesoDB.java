@@ -1,4 +1,4 @@
-package pe.egcc.prueba;
+package pe.egcc.eurekacs.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

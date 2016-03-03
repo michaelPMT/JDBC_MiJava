@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package aprendiendojdbc;
+package pe.egcc.eurekacs;
 
 /**
  *
  * @author Alumno
  */
-public class AprendiendoJDBC {
+public class ClasePrincipal {
 
     /**
      * @param args the command line arguments

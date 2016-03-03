@@ -5,6 +5,12 @@
  */
 package pe.egcc.prueba;
 
+import aprendiendojdbc.AccesoDB;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Alumno
@@ -27,21 +33,170 @@ public class prueba05 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtpater = new javax.swing.JTextField();
+        txtmater = new javax.swing.JTextField();
+        txtdni = new javax.swing.JTextField();
+        txtciu = new javax.swing.JTextField();
+        txtnom = new javax.swing.JTextField();
+        txtdirec = new javax.swing.JTextField();
+        txttele = new javax.swing.JTextField();
+        txtemail = new javax.swing.JTextField();
+        Procesar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtpater.setText("Paterno");
+
+        txtmater.setText("Materno");
+        txtmater.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtmaterActionPerformed(evt);
+            }
+        });
+
+        txtdni.setText("DNI");
+
+        txtciu.setText("Ciudad");
+        txtciu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtciuActionPerformed(evt);
+            }
+        });
+
+        txtnom.setText("Nombre");
+
+        txtdirec.setText("Direccion");
+
+        txttele.setText("Telefono");
+
+        txtemail.setText("Email");
+
+        Procesar.setText("Procesar");
+        Procesar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProcesarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(93, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txttele, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtdirec, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtnom, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtciu, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtmater, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtpater, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Procesar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(125, 125, 125))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(txtpater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtmater, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtnom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(txtdni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtciu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtdirec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txttele, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(Procesar, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtmaterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmaterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtmaterActionPerformed
+
+    private void txtciuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtciuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtciuActionPerformed
+
+    private void ProcesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcesarActionPerformed
+        Connection cn = null;
+        try {
+            cn = AccesoDB.getConnection();
+
+            cn.setAutoCommit(false);
+            String sql = "select INT_CONTITEM,INT_CONTLONGITUD "
+                    + "from contador "
+                    + "where VCH_CONTTABLA = 'Cliente'"
+                    + "for update";
+            PreparedStatement pstm = cn.prepareStatement(sql);
+            ResultSet rs = pstm.executeQuery();
+            if (!rs.next()) {
+                rs.close();
+                pstm.close();
+                throw new Exception("Error en Parametros");
+            }
+            int cont = rs.getInt("INT_CONTITEM");
+            int size = rs.getInt("INT_CONTLONGITUD");
+
+            String formato = "%1$0" + size + "d";
+            cont++;
+            
+            String codigo = String.format(formato, cont);
+
+            sql = "update contador set INT_CONTITEM = ? "
+                    + "where VCH_CONTTABLA='Cliente'";
+            pstm = cn.prepareStatement(sql);
+            pstm.setInt(1, cont);
+            pstm.executeUpdate();
+            pstm.close();
+
+            sql = "insert into cliente(chr_cliecodigo,vch_cliepaterno,"
+                    + "vch_cliematerno,vch_clienombre,chr_cliedni,"
+                    + "vch_clieciudad,vch_cliedireccion,"
+                    + "vch_clietelefono,vch_clieemail) "
+                    + "values(?,?,?,?,?,?,?,?,?)";
+            pstm = cn.prepareStatement(sql);
+            pstm.setString(1, codigo);
+            pstm.setString(2, txtpater.getText());
+            pstm.setString(3, txtmater.getText());
+            pstm.setString(4, txtnom.getText());
+            pstm.setString(5, txtdni.getText());
+            pstm.setString(6, txtciu.getText());
+            pstm.setString(7, txtdirec.getText());
+            pstm.setString(8, txttele.getText());
+            pstm.setString(9, txtemail.getText());
+            pstm.executeUpdate();
+            // Confirmar Tx
+            cn.commit();
+            JOptionPane.showMessageDialog(rootPane, "Codigo: " + codigo);
+        } catch (Exception e) {
+            try {
+                cn.rollback();
+            } catch (Exception e1) {
+            }
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            //e.printStackTrace();
+        } finally {
+            try {
+                cn.close();
+            } catch (Exception e) {
+            }
+        }
+
+    }//GEN-LAST:event_ProcesarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +234,14 @@ public class prueba05 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Procesar;
+    private javax.swing.JTextField txtciu;
+    private javax.swing.JTextField txtdirec;
+    private javax.swing.JTextField txtdni;
+    private javax.swing.JTextField txtemail;
+    private javax.swing.JTextField txtmater;
+    private javax.swing.JTextField txtnom;
+    private javax.swing.JTextField txtpater;
+    private javax.swing.JTextField txttele;
     // End of variables declaration//GEN-END:variables
 }

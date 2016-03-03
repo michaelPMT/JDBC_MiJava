@@ -20,3 +20,6 @@ Resultset
  if(rs.next()){}
 *0 o mas filas
  while(rs.next()){}
+------------------------
+select * from contador for update"blokea"
+rollback"abre una transaccion"
