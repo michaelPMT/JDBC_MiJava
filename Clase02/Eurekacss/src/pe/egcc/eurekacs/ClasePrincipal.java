@@ -5,6 +5,8 @@
  */
 package pe.egcc.eurekacs;
 
+import pe.egcc.eurekacs.view.LogonView;
+
 /**
  *
  * @author Alumno
@@ -15,7 +17,7 @@ public class ClasePrincipal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        LogonView.main(null);
     }
     
 }
