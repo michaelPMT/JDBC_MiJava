@@ -1,5 +1,4 @@
 package pe.egcc.prueba;
-import aprendiendojdbc.AccesoDB;
 import java.sql.Connection;
 import java.sql.Statement;
 public class prueba02 {

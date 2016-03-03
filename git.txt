@@ -13,3 +13,10 @@ connect willyan/atletico as sysdba
 conn system/oracle
 show user
 dabases
+
+----------------------------------
+Resultset
+*1 a 0 filas
+ if(rs.next()){}
+*0 o mas filas
+ while(rs.next()){}
