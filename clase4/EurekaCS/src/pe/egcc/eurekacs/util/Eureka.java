@@ -10,10 +10,10 @@ public class Eureka {
     }
     
     //Constantes del Crud
-    public static String CRUD_EDITAR = "EDITAR";
-    public static String CRUD_ELIMINAR = "ELIMINAR";
-    public static String CRUD_NUEVO = "NUEVO";
-    public static String CRUD_VOTAR = "vOTAR";
+    public static final String CRUD_EDITAR = "EDITAR";
+    public static final String CRUD_ELIMINAR = "ELIMINAR";
+    public static final String CRUD_NUEVO = "NUEVO";
+  
     
     
     

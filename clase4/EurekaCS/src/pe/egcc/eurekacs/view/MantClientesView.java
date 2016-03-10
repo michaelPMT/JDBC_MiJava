@@ -5,8 +5,15 @@
  */
 package pe.egcc.eurekacs.view;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import pe.egcc.eurekacs.controller.ClienteController;
 import pe.egcc.eurekacs.domain.Cliente;
 import pe.egcc.eurekacs.util.Dialogo;
@@ -96,25 +103,30 @@ public class MantClientesView extends javax.swing.JInternalFrame {
         });
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pe/egcc/eurekacs/img/Excel.png"))); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pe/egcc/eurekacs/img/PDF.png"))); // NOI18N
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "PATERNO", "MATERNO", "NOMBRE", "DNI", "EMAIL"
+                "CODIGO", "PATERNO", "MATERNO", "NOMBRE", "DNI", "EMAIL"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, true, true
+                true, false, false, false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -157,19 +169,22 @@ public class MantClientesView extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Eliminar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton6)
-                        .addGap(0, 119, Short.MAX_VALUE)))
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 148, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Buscar)
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(Buscar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -180,13 +195,12 @@ public class MantClientesView extends javax.swing.JInternalFrame {
                             .addComponent(txtPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(nuevo)
-                    .addComponent(Editar)
-                    .addComponent(Eliminar)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
+                    .addComponent(nuevo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Editar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Eliminar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -264,6 +278,42 @@ public class MantClientesView extends javax.swing.JInternalFrame {
             mostrarLista(lista);
         }
     }//GEN-LAST:event_EliminarActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if (lista == null || lista.size() == 0) {
+            return;
+        }
+        
+        try {
+            
+            //El Libro
+        String plantilla = "/pe/egcc/eurekacs/plantillas/Clientes.xls";
+        InputStream isPlantilla = Class.class.getResourceAsStream(plantilla);
+        
+            //InputStream isPlantilla = new FileInputStream(plantilla);
+            POIFSFileSystem fs = new POIFSFileSystem(isPlantilla);
+            HSSFWorkbook wb = new HSSFWorkbook(fs, true);
+            //Acceder a la hoja
+            HSSFSheet sheet = wb.getSheetAt(0);
+            //Llenar datos
+            int fila = 0;
+            for(Cliente bean: lista){
+                fila++;
+                HSSFRow row = sheet.getRow(fila);
+                row.createCell(0).setCellValue(bean.getCodigo());
+                row.createCell(1).setCellValue(bean.getPaterno());
+                row.createCell(2).setCellValue(bean.getMaterno());
+            }
+            //GRbar
+            FileOutputStream fileOut = new FileOutputStream("E:\\EGCC\\JDBC_MiJava\\clase4\\EurekaCS\\src\\pe\\egcc\\eurekacs\\Plantillas/cliente.xls");
+            wb.write(fileOut);
+            fileOut.close();
+            Dialogo.info(rootPane, "Proceso OK.");
+            
+        } catch (Exception e) {
+            Dialogo.error(rootPane, e.getMessage());
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
