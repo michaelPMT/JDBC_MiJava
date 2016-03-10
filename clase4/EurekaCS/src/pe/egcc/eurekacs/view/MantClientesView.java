@@ -110,6 +110,11 @@ public class MantClientesView extends javax.swing.JInternalFrame {
         });
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pe/egcc/eurekacs/img/PDF.png"))); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         tblData.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -280,40 +285,82 @@ public class MantClientesView extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if (lista == null || lista.size() == 0) {
-            return;
-        }
-        
-        try {
-            
-            //El Libro
-        String plantilla = "/pe/egcc/eurekacs/plantillas/Clientes.xls";
-        InputStream isPlantilla = Class.class.getResourceAsStream(plantilla);
-        
-            //InputStream isPlantilla = new FileInputStream(plantilla);
-            POIFSFileSystem fs = new POIFSFileSystem(isPlantilla);
-            HSSFWorkbook wb = new HSSFWorkbook(fs, true);
-            //Acceder a la hoja
-            HSSFSheet sheet = wb.getSheetAt(0);
-            //Llenar datos
-            int fila = 0;
-            for(Cliente bean: lista){
-                fila++;
-                HSSFRow row = sheet.getRow(fila);
-                row.createCell(0).setCellValue(bean.getCodigo());
-                row.createCell(1).setCellValue(bean.getPaterno());
-                row.createCell(2).setCellValue(bean.getMaterno());
-            }
-            //GRbar
-            FileOutputStream fileOut = new FileOutputStream("E:\\EGCC\\JDBC_MiJava\\clase4\\EurekaCS\\src\\pe\\egcc\\eurekacs\\Plantillas/cliente.xls");
-            wb.write(fileOut);
-            fileOut.close();
-            Dialogo.info(rootPane, "Proceso OK.");
-            
-        } catch (Exception e) {
-            Dialogo.error(rootPane, e.getMessage());
-        }
+        if(lista == null || lista.size() == 0){
+      return;
+    }
+    try {
+      // El libro
+      String plantilla = "/pe/egcc/eurekacs/plantillas/clientes.xls";
+      InputStream isPlantilla = Class.class.getResourceAsStream(plantilla);
+      POIFSFileSystem fs = new POIFSFileSystem(isPlantilla);
+      HSSFWorkbook wb = new HSSFWorkbook(fs, true);
+      // Acceder a la hoja
+      HSSFSheet sheet = wb.getSheetAt(0);
+      // Llenar datos
+      int fila = 0;
+      for(Cliente bean: lista){
+        fila++;
+        HSSFRow row = sheet.createRow(fila);
+        row.createCell(0).setCellValue(bean.getCodigo());
+        row.createCell(1).setCellValue(bean.getPaterno());
+        row.createCell(2).setCellValue(bean.getMaterno());
+      }
+      // Grabar
+      FileOutputStream fileOut = new FileOutputStream("e://egcc/clientes.xls");
+      wb.write(fileOut);
+      fileOut.close();
+      Dialogo.info(rootPane, "Proceso ok.");
+    } catch (Exception e) {
+      e.printStackTrace();
+      Dialogo.error(rootPane, e.getMessage());
+    }
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+       if(lista == null || lista.isEmpty()){
+      return;
+    }
+        Documentnt document = null;
+    try {
+      // Archivo destino
+      String archivo = "E:\\EGCC\\clientes.pdf";
+      // step 1
+      document = new Document();
+      // step 2
+      PdfWriter.getInstance(document, new FileOutputStream(archivo));
+      // step 3
+      document.open();
+      // step 4: tabla
+      PdfPTable table = new PdfPTable(5);
+      // step 5: Cabeceras
+      table.addCell("CODIGO");
+      table.addCell("PATERNO");
+      table.addCell("MATERNO");
+      table.addCell("NOMBRE");
+      table.addCell("EMAIL");
+      // step 6: Data
+      for (Cliente cliente : lista) {
+        table.addCell(cliente.getCodigo());
+        table.addCell(cliente.getPaterno());
+        table.addCell(cliente.getMaterno());
+        table.addCell(cliente.getNombre());
+        table.addCell(cliente.getEmail());
+      }
+      // step 7: Cargar la tabla
+      document.add(table);
+      // step 8: Fin
+      Dialogo.info(this, "Proceso ejecutado correctamente.");
+
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      Dialogo.error(this, "No se tiene permiso para crear el archivo.");
+    } finally {
+      try {
+        if(document != null) document.close();
+      } catch (Exception e) {
+      }
+    }
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
