@@ -2,6 +2,7 @@ package pe.egcc.eurekacs.controller;
 
 import pe.egcc.eurekacs.domain.Empleado;
 import pe.egcc.eurekacs.service.LogonService;
+import pe.egcc.eurekacs.util.Memoria;
 
 /**
  *
@@ -14,6 +15,8 @@ public class LogonController {
         Empleado empleado = service.validar(usario, clave);
         if(empleado == null){
             throw new RuntimeException("Datos Incorrectos");
+        }else{
+            Memoria.put("usuario", empleado);
         }
     }
 }

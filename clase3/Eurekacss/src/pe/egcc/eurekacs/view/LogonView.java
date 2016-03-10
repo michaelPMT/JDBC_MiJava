@@ -7,6 +7,7 @@ package pe.egcc.eurekacs.view;
 
 import javax.swing.JOptionPane;
 import pe.egcc.eurekacs.controller.LogonController;
+import pe.egcc.eurekacs.util.Dialogo;
 
 /**
  *
@@ -135,7 +136,7 @@ public class LogonView extends javax.swing.JDialog {
             this.dispose();
             FormularioMDI.main(null);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane,e.getMessage());
+            Dialogo.error(rootPane,e.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

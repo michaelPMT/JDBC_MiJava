@@ -1,5 +1,7 @@
 package pe.egcc.eurekacs.service;
 
+import pe.egcc.eurekacs.dao.espec.DaoEmpleadoEspec;
+import pe.egcc.eurekacs.dao.impl.DaoEmpleadoImpl;
 import pe.egcc.eurekacs.domain.Empleado;
 
 /**
@@ -9,11 +11,9 @@ import pe.egcc.eurekacs.domain.Empleado;
 public class LogonService {
     
     public Empleado validar(String usuario, String clave){
-        Empleado bean;
-        if (usuario.equals("gustavo")) {
-            bean = new Empleado();
-        }
-        return new Empleado();
-    }
-    
+        Empleado bean = null;
+        DaoEmpleadoEspec dao = new DaoEmpleadoImpl();
+        bean = dao.validar(usuario, clave);
+        return bean;
+    }    
 }
